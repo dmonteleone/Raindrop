@@ -17,7 +17,7 @@ def destroy(target):
     destroyed.append(target)
     
 def spawn(obj):
-    sprites.append(target)
+    sprites.append(obj)
     
 def animate():
     for sprite in sprites:
