@@ -25,6 +25,9 @@ class Player(Sprite):
         fill(self.c)
         ellipse(self.x, self.y, self.diameter, self.diameter)
         
+    def handleCollision(self):
+        pass
+        
     def move(self):
         if self.left:
             self.x -= self.speed

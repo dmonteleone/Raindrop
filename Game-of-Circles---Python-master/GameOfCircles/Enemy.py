@@ -6,11 +6,14 @@ import SpriteManager
 
 class Enemy(Sprite):
     
-    
     speed = 8
     diameter = 50
     c = color(0, 0, 255)
-    
+    mark = 0
+    wait = 1000
+    go = True
+
+
     def move(self):
         self.x += self.speed
         if self.x < 0 or self.x > width:
@@ -23,12 +26,18 @@ class Enemy(Sprite):
         d = ((self.x - target.x)**2 + (self.y - target.y)**2)**.5
         xComp = target.x - self.x
         yComp = target.y - self.y
-        xVec = xComp/2
-        yVec = yComp/2
+        xVec = xComp/2 * .1
+        yVec = yComp/2 * .1
         return PVector(xVec, yVec)
-        return PVector(0,10) #use unit vector values
     
     def fire(self, vector):
-        SpriteManager.spawn(Bullet(self.x, self.y, vector, self.team))
+        if(millis() - self.mark > self.wait):
+            self.go = not self.go
+            self.mark = millis()
+            
+        if(self.go):
+            self.go = False
+            SpriteManager.spawn(Bullet(self.x, self.y, vector, self.team))
+        
         
     
